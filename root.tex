@@ -1,0 +1,181 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+\usepackage{lipsum,graphicx}
+\usepackage{here}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{comment}
+\usepackage[maxfloats=256]{morefloats}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{stfloats}
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+
+
+
+\title{\LARGE \bf
+DNN Based Camera Attitude Estimation \\ Using Aggregated Information from Camera and Depth Images
+}
+
+
+\author{Hibiki Kawai$^{1}$ and Yoji Kuroda$^{2}$% <-this % stops a space
+\thanks{$^{1}$Department of Mechanical Engineering, Graduate School of Science and Engineering, Meiji University. Higashi-Mita1-1-1, Tama Ward, Kawasaki City, Kanagawa Prefecture, Japan.
+}
+\thanks{$^{2}$Department of Mechanical Engineering, School of Science and Technology, Meiji University. Higashi-Mita1-1-1, Tama Ward, Kawasaki City, Kanagawa Prefecture, Japan.
+}
+\thanks{*Contact to corresponding author:
+        {\tt\small ce212026@meiji.ac.jp}}}%}% <-this stops a space
+
+
+
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+In this paper, we propose a camera attitude estimation network that features aggregated information extracted from camera and depth images. When robots estimate attitude, the estimation method using IMU or gyro-sensors like robots widely used is affected by noise generated from the ground, which makes the attitude estimation difficult. Although there are several methods for estimating the attitude of ground robots, a camera image-based estimation method using deep learning has been studied in recent years. Previous studies have improved the accuracy of the attitude estimation in a known environment, but that in an unknown environment remains low. When making an attitude estimation in an unknown environment, it is important to have an assumption of the terrain, such as that walls are approximately vertical to the ground. Our research uses as input two types of images: a camera image for landscape information and a depth image for terrain information. We propose a network that incorporates a feature extractor that uses cross-reference information of different modalities obtained from these two types of images and a classification type output layer. This network aims to improve the accuracy of attitude estimation in unknown environments. Source code of proposed method is available at \url{https://github.com/Hibiki1020/camera_and_depth_image_attitude_estimator}
+
+\end{abstract}
+
+%本論文ではOCRのアイデアをベースとしたクラス分類ニューラルネットワークによるカメラ姿勢推定手法を提案する。
+%ロボットattitudeを推定する場合、ドローンのようにIMUやジャイロセンサを用いたattitude推定手法では、地面から発生するノイズに影響されてattitude推定が困難なものになる。
+%地上ロボットのattitude estimation手法は複数存在するが、深層学習を使用したcamera imageによる推定手法の研究が近年研究されている。これまでの研究によってknown environmentにおけるattitude推定の精度は改善したが, unknown environmentにおけるattitude estimationの精度は依然低いままであった。
+%unknown environmentでのattitude estimationを行うときに重要となるのは, 壁は地面に対して垂直であるなどの地形についての前提知識である。
+%本研究は、風景情報を得られるcamera imageと地形情報を得られるdepth imageの二つを入力として利用する。この二種類の画像から得られるmodalityの異なる情報を相互に参照しあうfeature extractorとclassification type output layerを取り入れたネットワークを提案する。このネットワークによってunknown environmentにおけるattitude estimationの精度改善を狙う
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{section/1_intro}
+
+\input{section/2_method}
+
+\input{section/3_environment}
+
+\input{section/4_experiment_result}
+
+\input{section/5_conclusion}
+
+\input{section/appendix}
+\section{Acknowledgement}
+We have received generous support from new Energy and Industrial Technology Development Organization (NEDO) and Meiji University Research Cluster for Autonomous Robotic Systems for study. We would like thank it.
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\bibliography{reference} %hoge.bibから拡張子を外した名前
+\bibliographystyle{unsrt} %参考文献出力スタイル
+
+\newpage
+
+\begin{figure}[htpb]
+\centering
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.55]{./figure/appendix/known_env/image_12.png}
+    \subcaption{Image Obtained from Forest in Known Environment}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.55]{./figure/appendix/known_env/image_35.png}
+    \subcaption{Image Obtained from House in Known Environment}
+  \end{minipage} \\
+\centering
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.55]{./figure/appendix/unknown_env/image_4.png}
+    \subcaption{Image Obtained from Office Entrance in Unknown Environment}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.55]{./figure/appendix/unknown_env/image_148.png}
+    \subcaption{Image Obtained from Corridor in Unknown Environment}\label{fig:roll_example}
+  \end{minipage}
+  \caption{Images Obtained Using Grad-CAM in Kawai's Method\cite{9708864}}\label{fig:grad_cam}
+\end{figure}
+
+\begin{comment}
+\begin{figure}[htpb]
+\centering
+  \begin{minipage}[htpb]{1.0\hsize}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_resnet50.png}
+    \subcaption{ResNet50}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_independent_resnet50.png}
+    \subcaption{ResNet50(W/O SA-Gate)}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_SII2022.png}
+    \subcaption{Kawai's Method}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_ozaki_mle.png}
+    \subcaption{Ozaki's Method(MLE)}
+  \end{minipage}
+  \caption{MAE of Attitude Estimation in Known Environment}\label{fig:MAE_scatter}
+\end{figure}
+
+\begin{figure}[htpb]
+\centering
+  \begin{minipage}[htpb]{1.0\hsize}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_resnet50_unknown.png}
+    \subcaption{ResNet50}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_independent_resnet50_unknown.png}
+    \subcaption{ResNet50(W/O SA-Gate)}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_SII2022_unknown.png}
+    \subcaption{Kawai's Method}
+  \end{minipage} \\
+  \begin{minipage}[htpb]{1.0\linewidth}
+    \centering
+    \includegraphics[keepaspectratio, scale=0.38]{./figure/appendix/scatter/MAE_graph_ozaki_mle_unknown.png}
+    \subcaption{Ozaki's Method(MLE)}
+  \end{minipage}
+  \caption{MAE of Attitude Estimation in Unknown Environment}\label{fig:MAE_scatter_unknown}
+\end{figure}
+\end{comment}
+
+
+\end{document}

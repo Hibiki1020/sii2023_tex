@@ -1,0 +1,29 @@
+
+\section{Appendix}\label{sec:appendix}
+\begin{comment}
+\subsection{MAE of Attitude Estimation}
+The results of inference are presented in Sec.\ref{sec:result} as Tab.\ref{tab:MAE_of_Error}. In this section, we present a scatterplot in Fig.\ref{fig:MAE_scatter} showing the error between the networks that performed well in the proposed method and the inference results of the comparison method. As shown in Fig.\ref{fig:MAE_scatter} and Fig.\ref{fig:MAE_scatter_unknown}, the points showing the inference results of the proposed method using the depth image are concentrated near the origin. This indicates that the use of the depth image is effective in attitude estimation. Fig.\ref{fig:MAE_scatter_unknown}, which shows the estimation results in an unknown environment, shows that the network with SA-Gate has the best accuracy in the estimation of roll. On the other hand, the network without SA-Gate was more accurate in pitch estimation.
+\end{comment}
+
+\subsection{In the Attitude estimation task, where does the network focus its attention?}
+To understand where the network is focusing its attention in the attention estimation task, we used Grad-CAM\cite{Grad-CAM} in Kawai's method\cite{9708864} to determine where the feature map was obtained from the attention. Since Grad-CAM supports only one input network, existing methods were used instead of the network of the proposed method. Some images processed by Grad-CAM are shown in Fig.\ref{fig:grad_cam}. As can be seen from these two figures, in the attitude estimation, the network directs its attention to the shape of the buildings and columns in the image. Buildings, columns, and beams as seen in the image are perpendicular or horizontal to the ground. This information is obtained by the network in the training process and is used in the attitude estimation process. This trend is particularly pronounced in the roll estimation and is visualized in Fig.\ref{fig:roll_example}. This indicates that for the attitude estimation in DNN using camera images, landmark objects are necessary, as in the method of Ozaki\cite{ozaki_lidar_normal}. However, compared to the LiDAR-based attitude estimation, the camera image-based estimation requires only a landmark object in front of the robot, so there are fewer restrictions on the environment in which it can demonstrate its capabilities.
+
+
+
+
+%Attitude estimation taskにおいて、ネットワークはどこを注目しているのかを把握するため、Kawaiの手法においてGrad-CAMを使用してfeature mapがどこを注目して得られたものなのかを可視化した。Grad-CAMは1入力のネットワークにしか対応していないため、提案手法のネットワークではなく既存の手法を用いた。この２つの図からわかるように、attitude estimationにおいてネットワークは画像の中にある建物や柱の形状にattentionを向けていることがわかる。画像に現れるような建物や柱、梁の形状は地面に対して垂直ないし水平である。この情報をネットワークは学習の中でつかんでおり、attitude estimationのときに役立てている。とくにrollの推定においてこの傾向は顕著であり、図CCCCCにもその様子が可視化されている。このことから、カメラ画像によるDNNでのattitude estimationにおいては、尾崎らの手法と同じくランドマークとなる物体が必要であることがわかる。ただし、LiDARを用いたattitude estimationと比較して、camera imageによる推定ではロボットの前方にランドマークとなる物体があればよいので、能力を発揮できる環境の制約は少ない。
+
+\begin{comment}
+\subsection{Source Code}
+The source code used in the experiments is as follows. The source code can be downloaded from the following link.
+
+%実験の際に使用されたソースコードは以下の通りである。機会学習のコードの場合、以下のリンクから訓練済みモデルもダウンロードできる。
+
+\begin{itemize}
+    \item Source code for proposed and comparison method. It is implemented using Python and Pytorch and Docker.
+    \url{https://github.com/Hibiki1020/camera_and_depth_image_attitude_estimator}
+    \item Source code for collect data. It is implemented using C++ and AirSim and Unreal Engine API.
+    \url{https://github.com/Hibiki1020/RGBD_LiDAR_airsim_controller}
+\end{itemize}
+
+\end{comment}
